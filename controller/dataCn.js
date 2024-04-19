@@ -1,6 +1,6 @@
-const express = require('express');
-const {DataCn} = require("../config/connect");
-const dataCn = express.Router();
+const express = require('express')
+const {DataCn} = require("../config/connect")
+const dataCn = express.Router()
 
 dataCn.post('/addDataCn', async (req, res) => {
     const {DataCn} = require('../config/connect')
