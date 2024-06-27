@@ -5,7 +5,7 @@ const dataCn = express.Router()
 dataCn.post('/addDataCn', async (req, res) => {
     const {DataCn} = require('../config/connect')
 
-    let {orderDate, id, list, saleCode, storeId, zone, area, noteCnOrder,createDate} = req.body
+    let {orderDate, orderNo, list, saleCode, storeId, zone, area, noteCnOrder, createDate, refOrder} = req.body
     // const query = 'SELECT * FROM data_cn_test';
     let i = 1
     for (let listProduct of list) {
@@ -26,11 +26,12 @@ dataCn.post('/addDataCn', async (req, res) => {
         dcn_note_order,
         dcn_numberitem,
         dcn_ststus,
-        dcn_craetedate
+        dcn_craetedate,
+        dcn_ref_order
         )
     VALUES (
         :orderDate,
-        :id,
+        :orderNo,
         :itemCode,
         :itemName,
         :itemQty,
@@ -45,12 +46,13 @@ dataCn.post('/addDataCn', async (req, res) => {
         :noteCnOrder,
         :numberItem,
         :status,
-        :createDate
+        :createDate,
+        :refOrder
     )`;
         const result = await DataCn.query(query, {
             type: DataCn.QueryTypes.SELECT, replacements: {
                 orderDate,
-                id,
+                orderNo,
                 itemCode:listProduct.id,
                 itemName:listProduct.name,
                 itemQty:listProduct.qty,
@@ -65,7 +67,8 @@ dataCn.post('/addDataCn', async (req, res) => {
                 noteCnOrder,
                 numberItem:i,
                 status:0,
-                createDate
+                createDate,
+                refOrder
             },
         });
         i++
