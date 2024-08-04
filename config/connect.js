@@ -10,5 +10,3 @@ const DataCn = new Sequelize(process.env.DATA_CN,process.env.USER_NAME_DATABASE9
 module.exports = {
     DataCn
 }
-
-
